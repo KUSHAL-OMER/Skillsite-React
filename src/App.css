@@ -1,4 +1,4 @@
-.App {
+/*.App {
   text-align: center;
 }
 
@@ -34,5 +34,55 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.home {
+  background-color: #3C415C;
+  width: 100%;
+  padding: 2%;
+}
+.content {
+  text-indent: 2%;
+  color: #fff;
+}
+.navbar-dark {
+  background-color: #151515;
+}
+.space {
+  width: 5%;
+}
+.navigate {
+  color: beige;
+  text-decoration: none;
+  padding: 2px;
+}
+.navigate:hover {
+  color: black;
+  background-color: aqua;
+  border-radius: 20%;
+  box-shadow: 5px 5px 20px aquamarine,
+  -5px -5px 20px aquamarine;
+}
+.active {
+  color: black;
+  background-color: yellow;
+  border-radius: 20%;
+  box-shadow: 5px 5px 20px gold,
+  -5px -5px 20px gold;
+}
+.butsaw {
+  display: none;
+}
+@media(max-width: 1200px) {
+  .saw {
+    display: none;
+  }
+  .butsaw {
+    display: block;
   }
 }
