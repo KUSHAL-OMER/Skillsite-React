@@ -1,13 +1,30 @@
-import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Profile from "./ProfileComponent";
 import Skills from './SkillComponent';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import Head from "./HeaderComponent";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { postCard, fetchCards } from "../redux/ActionCreaters";
 
-export default class Main extends Component {
+const mapStateToProps = state => { return{
+    cards: state.user
+};
+};
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchCards: () => { dispatch(fetchCards()) },
+    postCard: (msg, selected) => dispatch(postCard(msg, selected))
+});
+
+class Main extends Component {
+    
+    componentDidMount() {
+        this.props.fetchCards();
+        console.log(this.props.cards);
+    }
     render() {
-        return (
+            return (
             <div>
             <div className="navbar-dark">
                 <Head />
@@ -15,8 +32,8 @@ export default class Main extends Component {
                 <div className="home">
                 <Switch>
                     <Route path="/home" component={() => <Home />} />
-                    <Route path="/profiles" component={() => <Profile />} />
-                    <Route path="/skills" component={() => <Skills />} />
+                    <Route path="/profiles" component={() => <Profile cards={this.props.cards.cards} cardsErrMess={this.props.cards.errMess} />} />
+                    <Route path="/skills" component={() => <Skills postCard={this.props.postCard} />} />
                     <Redirect to="/home" />
                 </Switch>
                 </div>
@@ -24,3 +41,5 @@ export default class Main extends Component {
         )
     }
 }
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

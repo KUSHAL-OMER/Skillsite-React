@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Card, CardText, Form, FormGroup, Input, Label, Toast, ToastBody, ToastHeader } from 'reactstrap';
 
-
 //--------------------------------------------------SELECTION BUTTON----------------------------------------------------------------
 
 class Butn extends Component {
@@ -77,7 +76,7 @@ class Skills extends Component {
         super(props);
         this.state = { 
             selected: [],
-            value: '0'
+            content: ''
         };
     }
     RenderItems(item) {
@@ -95,6 +94,7 @@ class Skills extends Component {
         this.setState({
             selected: this.state.selected.concat(val)
         });
+        console.log(this.state.selected);
     }
     removeElement(val) {
         let i = this.state.selected.indexOf(val);
@@ -103,6 +103,7 @@ class Skills extends Component {
         this.setState({
             selected: items
         });
+        console.log(this.state.selected);
     }
 
     RenderForm() {
@@ -114,7 +115,11 @@ class Skills extends Component {
                 </FormGroup> <br />
                 <FormGroup>
                     <Label htmlFor="exp"><h6>Experience and projects</h6></Label>
-                    <Input type="textarea" name="exp" id="exp" />
+                    <Input type="textarea" name="exp" id="exp" onChange={(e) => {
+                        this.setState({
+                            content: e.target.value
+                        });
+                    }} />
                 </FormGroup>
             </Form>
         </>);
@@ -162,6 +167,16 @@ class Skills extends Component {
         }
     }
 
+    savedContent(tp) {
+        if(tp) {
+            this.props.postCard(this.state.content, this.state.selected);
+        }
+        this.setState({
+            selected: [],
+            content: ''
+        });
+    }
+
     render() { 
         const list = [{name: 'Python', val: '0'}, {name: 'Java', val: '0'}, {name: 'Java Script', val: '0'}, {name: 'Ruby', val: '0'}, {name: 'C++', val: '0'}, {name: 'Type Script', val: '0'}, {name: 'Rust', val: '0'}, {name: 'Go', val: '0'}];
         const cont = list.map((item) => {
@@ -200,7 +215,7 @@ class Skills extends Component {
                     {this.RenderItem()}
                 </div>
                 <div className='container' style={{marginBottom: '2%'}}>
-                    <Button color='primary'>Submit</Button>
+                    <Button color='primary' onClick={() => { this.savedContent(true) }}>Submit</Button>
                 </div>
             </Toast>
         </div>
