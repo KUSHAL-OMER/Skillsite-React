@@ -6,6 +6,7 @@ import Head from "./HeaderComponent";
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { postCard, fetchCards } from "../redux/ActionCreaters";
+import Footer from './FooterComponent'
 
 const mapStateToProps = state => { return{
     cards: state.user
@@ -37,6 +38,7 @@ class Main extends Component {
                     <Redirect to="/home" />
                 </Switch>
                 </div>
+                <Footer />
             </div>
         )
     }
