@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardFooter, Progress } from 'reactstrap';
+import { Card, CardBody, CardFooter, CardHeader, Progress, CardImg } from 'reactstrap';
 
 const RenderProgress = (props) => {
     var color='';
@@ -34,6 +34,11 @@ const RenderCard = (props) => {
 
     return ( 
         <Card style={{marginBottom: '5%'}}>
+            <CardHeader style={{textAlign: 'center'}}>
+                <CardImg src={'http://localhost:9000/images/' + props.item.photo} alt={props.item.name} />
+                {props.item.name}<br />
+                {props.item.email}
+            </CardHeader>
             <CardBody>
                 {props.item.exp}
             </CardBody>

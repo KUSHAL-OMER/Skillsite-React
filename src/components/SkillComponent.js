@@ -76,7 +76,10 @@ class Skills extends Component {
         super(props);
         this.state = { 
             selected: [],
-            content: ''
+            content: '',
+            name: '',
+            email: '',
+            image: null
         };
     }
     RenderItems(item) {
@@ -111,8 +114,28 @@ class Skills extends Component {
             <Form>
                 <FormGroup>
                     <Label htmlFor="photo"><h6>Profile image</h6></Label>
-                    <Input type="file" name="photo" id="photo" />
+                    <Input type="file" name="photo" id="photo" onChange={(e) => {
+                        this.setState({
+                            image: e.target.files[0]
+                        });
+                    }} />
                 </FormGroup> <br />
+                <FormGroup>
+                    <Label htmlFor="name"><h6>Name</h6></Label>
+                    <Input type="text" name="Name" id="Name" onChange={(e) => {
+                        this.setState({
+                            name: e.target.value
+                        });
+                    }} />
+                </FormGroup>
+                <FormGroup>
+                    <Label htmlFor="name"><h6>Email</h6></Label>
+                    <Input type="email" name="email" id="email" onChange={(e) => {
+                        this.setState({
+                            email: e.target.value
+                        });
+                    }} />
+                </FormGroup>
                 <FormGroup>
                     <Label htmlFor="exp"><h6>Experience and projects</h6></Label>
                     <Input type="textarea" name="exp" id="exp" onChange={(e) => {
@@ -169,11 +192,14 @@ class Skills extends Component {
 
     savedContent(tp) {
         if(tp) {
-            this.props.postCard(this.state.content, this.state.selected);
+            this.props.postCard(this.state.content, this.state.selected, this.state.name, this.state.email, this.state.image);
         }
         this.setState({
             selected: [],
-            content: ''
+            content: '',
+            name: '',
+            email: '',
+            image: null
         });
     }
 

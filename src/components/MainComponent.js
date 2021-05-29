@@ -14,8 +14,8 @@ const mapStateToProps = state => { return{
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    fetchCards: () => { dispatch(fetchCards()) },
-    postCard: (msg, selected) => dispatch(postCard(msg, selected))
+    fetchCards: () => { dispatch(fetchCards()); },
+    postCard: (msg, selected, name, email, image) => dispatch(postCard(msg, selected, name, email, image))
 });
 
 class Main extends Component {
